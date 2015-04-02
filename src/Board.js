@@ -153,7 +153,10 @@
       var diag = [];
       var count = xAty0;
       for(var i = 0; i < this.n; i++){
-        diag.push(this.get(i)[count]);
+        if(this._isInBounds(i,count)){
+          diag.push(this.get(i)[count]);
+        }
+
         if(count < this.n - 1){
           count++;
         }else{
@@ -173,7 +176,7 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      for(var i = 0; i < this.n; i++){
+      for(var i = -this.n; i < this.n; i++){
         if(this.hasMajorDiagonalConflictAt(i)){
           return true;
         }
@@ -186,7 +189,9 @@
       var diag = [];
       var count = xAty0;
       for(var i = 0; i < this.n; i++){
-        diag.push(this.get(i)[count]);
+        if(this._isInBounds(i,count)){
+          diag.push(this.get(i)[count]);
+        }
         if(count > 0){
           count--;
         }else{
@@ -206,7 +211,7 @@
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
 
-       for(var i = 0; i < this.n; i++){
+       for(var i = 0; i < 2 * this.n; i++){
         if(this.hasMinorDiagonalConflictAt(i)){
           return true;
         }
